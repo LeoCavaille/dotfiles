@@ -2,3 +2,18 @@ call pathogen#infect()
 call pathogen#helptags()
 
 set runtimepath^=~/.vim/bundle/ctrlp.vim
+
+" Always show statusline
+set laststatus=2
+
+" Use 256 colours (Use this setting only if your terminal supports 256 colours)
+set t_Co=256
+
+python from powerline.vim import setup as powerline_setup
+python powerline_setup()
+python del powerline_setup
+
+let g:solarized_termcolors=256
+syntax enable
+set background=dark
+colorscheme solarized
