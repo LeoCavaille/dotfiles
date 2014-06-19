@@ -1,0 +1,4 @@
+call pathogen#infect()
+call pathogen#helptags()
+
+set runtimepath^=~/.vim/bundle/ctrlp.vim
