@@ -2,6 +2,10 @@ call pathogen#infect()
 call pathogen#helptags()
 
 set runtimepath^=~/.vim/bundle/ctrlp.vim
+let g:ctrlp_custom_ignore = {
+  \ 'dir':  '\v[\/](build|\.(git|hg|svn))$',
+  \ 'file': '\v\.(pyc|so)$',
+  \ }
 
 " Always show statusline
 set laststatus=2
@@ -17,3 +21,9 @@ let g:solarized_termcolors=256
 syntax enable
 set background=dark
 colorscheme solarized
+
+set tabstop=4
+set shiftwidth=4
+set softtabstop=4
+set smarttab
+set expandtab
