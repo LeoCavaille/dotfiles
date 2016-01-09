@@ -7,3 +7,12 @@
 [submodule "vim/bundle/vim-colors-solarized"]
 	path = vim/bundle/vim-colors-solarized
 	url = git://github.com/altercation/vim-colors-solarized.git
+[submodule "vim/bundle/vim-better-whitespace"]
+	path = vim/bundle/vim-better-whitespace
+	url = git://github.com/ntpeters/vim-better-whitespace.git
+[submodule "vim/bundle/flake8"]
+	path = vim/bundle/flake8
+	url = git://github.com/nvie/vim-flake8
+[submodule "vim-new/bundle/Vundle.vim"]
+	path = vim-new/bundle/Vundle.vim
+	url = https://github.com/gmarik/Vundle.vim.git
