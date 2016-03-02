@@ -9,6 +9,7 @@ alias vi="vim"
 alias shs="ssh"
 alias hss="ssh"
 alias sl="ls"
+alias cul="curl"
 
 alias vimrc="vim ~/.vimrc"
 alias gite="git"
