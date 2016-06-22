@@ -67,3 +67,22 @@ function s3stg {
 function s3prod {
     s3cmd --access_key=$(s3key prod access) --secret_key=$(s3key prod secret) $@
 }
+
+function ddchromeproxy {
+    if [[ $# -ne 3 ]]; then
+        echo "usage: ddchromeproxy <prod/stg> <dest ip from jumpbox> <port to open locally>"
+        return
+    fi
+
+    # kill previous tunneling sessions
+    ssh $1 "ps aux | grep \$(whoami) | grep 'ssh -T -NL' | grep -v grep | awk '{ print \$2 }' | xargs --no-run-if-empty kill"
+
+    ssh -D 8888 -T $1 ssh -T -NL 127.0.0.1:9999:127.0.0.1:$3 $2 &
+    SSH_SESSION=$!
+    echo "Opened SSH tunnel in PID $SSH_SESSION"
+    echo "Opening chrome proxying through that"
+    TMPCHROME=$TMPDIR/`mktemp -d "chrome.XXXXXXX"`
+    open -W -a "Google Chrome" -n --args --proxy-server="socks://localhost:8888" --user-data-dir=$TMPCHROME --no-first-run http://localhost:9999
+    kill $SSH_SESSION
+    rm -rf $TMPCHROME
+}

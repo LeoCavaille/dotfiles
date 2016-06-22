@@ -18,10 +18,12 @@ Plugin 'scrooloose/syntastic'
 Plugin 'fatih/vim-go'
 Plugin 'rhysd/vim-go-impl'
 Plugin 'godlygeek/tabular'
+Plugin 'junegunn/vim-emoji'
 
 " Plugin 'davidhalter/jedi-vim'
 
-Plugin 'Valloric/YouCompleteMe'
+" Plugin 'Valloric/YouCompleteMe'
+Plugin 'nsf/gocode', {'rtp': 'vim/'}
 
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -81,10 +83,33 @@ let @d=':%g/import pdb; pdb.set_trace/d<CR>'
 autocmd Filetype python setlocal ts=4 sw=4 expandtab
 autocmd Filetype ruby setlocal ts=2 sw=2 expandtab
 
-let g:syntastic_go_checkers = ['golint', 'govet', 'errcheck']
+let g:syntastic_go_checkers = []
 let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['go'] }
+let g:syntastic_enable_go_checker = 0
 
 let g:go_fmt_command = "goimports"
 set backspace=indent,eol,start
 
 let mapleader = ","
+
+" The Silver Searcher
+if executable('ag')
+  " Use ag over grep
+  set grepprg=ag\ --nogroup\ --nocolor
+
+  " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
+  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+
+  " ag is fast enough that CtrlP doesn't need to cache
+  let g:ctrlp_use_caching = 0
+endif
+
+" bind K to grep word under cursor
+nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
+
+nmap <silent> <LEADER><LEFT>    :cpfile<CR><C-G>
+nmap <silent> <LEADER><RIGHT>  :cnfile<CR><C-G>
+nmap <silent> g<LEFT>    :bp<CR><C-G>
+nmap <silent> g<RIGHT>  :bn<CR><C-G>
+
+set completefunc=emoji#complete
