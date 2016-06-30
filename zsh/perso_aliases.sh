@@ -10,6 +10,9 @@ alias shs="ssh"
 alias hss="ssh"
 alias sl="ls"
 alias cul="curl"
+# typo gco
+alias gro="git checkout"
+alias er11="git checkout"
 
 alias vimrc="vim ~/.vimrc"
 alias gite="git"
